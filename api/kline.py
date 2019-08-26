@@ -16,14 +16,14 @@ def create_exchange(exchange_name):
 @bp.route("/kline", methods=['Get'], endpoint='kline')
 def kline():
     exchange_name = request.args.get('exchange_name')
-    #symbol = request.args.get('symbol')
+    symbol = request.args.get('symbol')
     timeframes = request.args.get('timeframes')
    # params = {'partial': False}
     exchange = create_exchange(exchange_name)
     #since = int(start.timestamp()*1000)
     time.sleep(exchange.rateLimit/1000)
     if exchange.has['fetchOHLCV']:
-        return make_response_ok(exchange.fetch_ohlcv('BTC/USDT', timeframes))
+        return make_response_ok(exchange.fetch_ohlcv(symbol, timeframes))
 
 
 @bp.route("/test", methods=['GET'], endpoint='test')
