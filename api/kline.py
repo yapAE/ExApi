@@ -3,7 +3,7 @@ import ccxt
 import time
 from api import make_response_ok
 
-bp = Blueprint("data", __name__, url_prefix='/api/v1/data')
+bp = Blueprint("kline", __name__, url_prefix='/api/v1/kline')
 
 
 def create_exchange(exchange_name):
@@ -13,11 +13,11 @@ def create_exchange(exchange_name):
     return exchange
 
 
-@bp.route("/kline", methods=['Get'], endpoint='kline')
-def kline():
-    exchange_name = request.args.get('exchange_name')
-    symbol = request.args.get('symbol')
-    timeframes = request.args.get('timeframes')
+@bp.route("/<path:symbol>", methods=['Get'], endpoint='kline')
+def kline(symbol):
+    exchange_name = request.args.get('ex_id')
+   # symbol = request.args.get('symbol')
+    timeframes = request.args.get('tf')  # timeframes
    # params = {'partial': False}
     exchange = create_exchange(exchange_name)
     #since = int(start.timestamp()*1000)
