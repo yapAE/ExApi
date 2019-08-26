@@ -23,3 +23,11 @@ def kline():
     time.sleep(exchange.rateLimit/1000)
     if exchange.has['fetchOHLCV']:
         return exchange.fetch_ohlcv(symbol, timeframes)
+
+
+@bp.route("/test", methods=['GET'], endpoint='test')
+def test():
+    exchange_name = request.args.get('exchange_name')
+    exchange = create_exchange(exchange_name)
+   # time.sleep(exchange.reteLimet/1000)
+    return exchange.markets
