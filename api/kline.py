@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 import ccxt
 import time
 
@@ -13,7 +13,10 @@ def create_exchange(exchange_name):
 
 
 @bp.route("/kline", methods=['Get'], endpoint='kline')
-def kline(exchange_name, symbol, timeframes):
+def kline():
+    exchange_name = request.args.get('exchange_name')
+    symbol = request.args.get('symbol')
+    timeframes = request.args.get('timeframes')
    # params = {'partial': False}
     exchange = create_exchange(exchange_name)
     #since = int(start.timestamp()*1000)
