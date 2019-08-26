@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 import ccxt
 import time
+from api import make_response_ok
 
 bp = Blueprint("data", __name__, url_prefix='/api/v1/data')
 
@@ -22,7 +23,7 @@ def kline():
     #since = int(start.timestamp()*1000)
     time.sleep(exchange.rateLimit/1000)
     if exchange.has['fetchOHLCV']:
-        return exchange.fetch_ohlcv('BTC/USDT', timeframes)
+        return make_response_ok(exchange.fetch_ohlcv('BTC/USDT', timeframes))
 
 
 @bp.route("/test", methods=['GET'], endpoint='test')
