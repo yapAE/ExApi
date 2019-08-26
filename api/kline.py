@@ -2,7 +2,7 @@ from flask import Blueprint
 import ccxt
 import time
 
-bp = Blueprint('kline', __name__, url_prefix='api/v1/kline')
+bp = Blueprint("data", __name__, url_prefix='api/v1/data')
 
 
 def create_exchange(exchange_name):
@@ -12,7 +12,7 @@ def create_exchange(exchange_name):
     return exchange
 
 
-@bp.route('kline', method=['Get'], endpoint='kline')
+@bp.route('/kline/<exchange_name>/<symbol>/<timeframes>', method=['Get'], endpoint='kline')
 def kline(exchange_name, symbol, timeframes):
    # params = {'partial': False}
     exchange = create_exchange(exchange_name)
