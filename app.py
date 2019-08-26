@@ -1,5 +1,6 @@
 import ccxt
 from flask import Flask, Blueprint
+from api import kline
 app = Flask(__name__)
 
 app.register_blueprint(kline.bp)
