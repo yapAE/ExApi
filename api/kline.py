@@ -29,5 +29,6 @@ def kline():
 def test():
     exchange_name = request.args.get('exchange_name')
     exchange = create_exchange(exchange_name)
-   # time.sleep(exchange.reteLimet/1000)
-    return exchange.markets
+    for symbol in exchange.markets:
+        time.sleep(exchange.rateLimit/1000)
+        return exchange.fetch_ohlcv(symbol, '1d')
