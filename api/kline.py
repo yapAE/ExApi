@@ -31,4 +31,4 @@ def test():
     exchange = create_exchange(exchange_name)
     for symbol in exchange.markets:
         time.sleep(exchange.rateLimit/1000)
-        return exchange.fetch_ohlcv(symbol, '1d')
+        print(symbol, exchange.fetch_ohlcv(symbol, '1d'))
