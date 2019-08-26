@@ -2,7 +2,7 @@ from flask import Blueprint
 import ccxt
 import time
 
-bp = Blueprint("data", __name__, url_prefix='api/v1/data')
+bp = Blueprint("data", __name__, url_prefix='/api/v1/data')
 
 
 def create_exchange(exchange_name):
