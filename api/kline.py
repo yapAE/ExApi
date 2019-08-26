@@ -12,7 +12,7 @@ def create_exchange(exchange_name):
     return exchange
 
 
-@bp.route("data", methods=['Get'], endpoint='kline')
+@bp.route("/kline", methods=['Get'], endpoint='kline')
 def kline(exchange_name, symbol, timeframes):
    # params = {'partial': False}
     exchange = create_exchange(exchange_name)
