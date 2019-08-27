@@ -19,7 +19,7 @@ def kline(symbol):
         return make_response_ok(exchange.fetch_ohlcv(symbol, timeframes))
 
 
-@_kline.route("ticker/<path:symbol", methods=['GET'], endpoint='ticker')
+@_kline.route("ticker/<path:symbol>", methods=['GET'], endpoint='ticker')
 def ticker(symbol):
     exchange_name = request.args.get('ex')
     exchange = create_exchange(exchange_name)
