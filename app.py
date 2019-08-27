@@ -4,6 +4,7 @@ from api import kline
 app = Flask(__name__)
 
 app.register_blueprint(kline.bp)
+app.register_blueprint(order._order)
 
 
 @app.route('/exchanges', methods=['GET'])
