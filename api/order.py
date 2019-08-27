@@ -18,5 +18,5 @@ def trades(symbol):
     exchange_name = request.args.get('ex')
     limit = request.args.get('limit')
     exchang = create_exchange(exchange_name)
-    trades = exchang.fetch_trades(symbol, limit)
+    trades = exchang.fetch_trades(symbol=symbol, limit=limit)
     return make_response_ok(trades)
