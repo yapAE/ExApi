@@ -3,7 +3,7 @@ from flask import Flask, Blueprint
 from api import kline, order
 app = Flask(__name__)
 
-app.register_blueprint(kline.bp)
+app.register_blueprint(kline._kline)
 app.register_blueprint(order._order)
 
 

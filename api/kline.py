@@ -1,21 +1,14 @@
 from flask import Blueprint, request
 import ccxt
 import time
-from api import make_response_ok
+from api import make_response_ok, create_exchange
 
-bp = Blueprint("kline", __name__, url_prefix='/api/v1')
-
-
-def create_exchange(exchange_name):
-    # 创建交易所
-    exchange = getattr(ccxt, exchange_name)()
-    exchange.load_markets()
-    return exchange
+_kline = Blueprint("kline", __name__, url_prefix='/api/v1')
 
 
-@bp.route("kline/<path:symbol>", methods=['Get'], endpoint='kline')
+@_kline.route("kline/<path:symbol>", methods=['Get'], endpoint='kline')
 def kline(symbol):
-    exchange_name = request.args.get('ex_id')
+    exchange_name = request.args.get('ex')
    # symbol = request.args.get('symbol')
     timeframes = request.args.get('tf')  # timeframes
    # params = {'partial': False}
@@ -26,10 +19,9 @@ def kline(symbol):
         return make_response_ok(exchange.fetch_ohlcv(symbol, timeframes))
 
 
-@bp.route("/test", methods=['GET'], endpoint='test')
-def test():
-    exchange_name = request.args.get('exchange_name')
+@_kline.route("ticker/<path:symbol", methods=['GET'], endpoint='ticker')
+def ticker(symbol):
+    exchange_name = request.args.get('ex')
     exchange = create_exchange(exchange_name)
-    for symbol in exchange.markets:
-        time.sleep(exchange.rateLimit/1000)
-        print(symbol, exchange.fetch_ohlcv(symbol, '1d'))
+    ticker = exchange.fetch_ticker(symbol)
+    return make_response_ok(ticker)
