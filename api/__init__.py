@@ -25,3 +25,12 @@ def make_response_ok(data=None):
 def make_response_error(code, msg):
     resp = {'code': code, 'msg': msg}
     return jsonify(resp)
+
+# Exchange
+
+
+def create_exchange(exchange_name):
+    # 创建交易所
+    exchange = getattr(ccxt, exchange_name)()
+    exchange.load_markets()
+    return exchange
