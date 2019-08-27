@@ -1,3 +1,4 @@
+import ccxt
 from flask import jsonify, request
 
 
