@@ -1,14 +1,14 @@
 FROM alpine
 RUN apk update \
     && apk upgrade \
-    && apk add \
+    && apk add --no-cache\
     build-base \
     python3 \
     python3-dev \
-    python3-pip
-
+    && python3 -m ensurepip
 ENV TIMEZONE   Asia/Shanghai
-RUN echo "${TIMEZONE}" > /etc/timezone
+RUN echo "${TIMEZONE}" > /etc/timezone \
+    && ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime 
 WORKDIR /opt/exApi
 COPY requirements.txt ./
 RUN pip3 install --upgrade pip setuptools
