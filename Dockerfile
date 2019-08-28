@@ -5,8 +5,8 @@ RUN apk update \
     build-base \
     python3-dev \
     libffi-dev \
-    openssl-dev \
-    ENV TIMEZONE   Asia/Shanghai
+    openssl-dev 
+ENV TIMEZONE   Asia/Shanghai
 RUN echo "${TIMEZONE}" > /etc/timezone \
     && ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime 
 WORKDIR /opt/exApi
