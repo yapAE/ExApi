@@ -1,5 +1,5 @@
 FROM python:3.7-alpine
-RUN apk add gcc
+RUN apk add gcc python3-devel
 WORKDIR /opt/exApi
 COPY requirements.txt ./
 
