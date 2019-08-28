@@ -5,8 +5,8 @@ RUN apk update \
     build-base \
     python3 \
     python3-dev \
-    libffi \
-    openssl \
+    libffi-dev \
+    openssl-dev \
     && python3 -m ensurepip
 ENV TIMEZONE   Asia/Shanghai
 RUN echo "${TIMEZONE}" > /etc/timezone \
