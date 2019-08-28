@@ -1,19 +1,22 @@
 import ccxt
 from flask import Flask, Blueprint
-from api import kline, order
+from api import kline, order, make_response_error
 app = Flask(__name__)
 
 app.register_blueprint(kline._kline)
 app.register_blueprint(order._order)
 
 
-@app.route('/exchanges', methods=['GET'])
-def get_exchanges():
-    okcoin = ccxt.okcoinusd()
-    markets = okcoin.load_markets()
+@app.route('/')
+def hello():
+    data = {"msg": "Hello!"}
+    return data
 
-    return markets
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return make_response_error(404, error.description)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080)
