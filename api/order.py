@@ -16,7 +16,7 @@ def order(symbol):
 @_order.route("trades/<path:symbol>", methods=['GET'], endpoint='trades')
 def trades(symbol):
     exchange_name = request.args.get('ex')
-    limit = request.args.get('limit')
+  #  limit = request.args.get('limit')
     exchang = create_exchange(exchange_name)
-    trades = exchang.fetch_trades(symbol, 2)
+    trades = exchang.fetch_trades(symbol)
     return make_response_ok(trades)
