@@ -14,5 +14,6 @@ def exchanges():
 @_exchange.route("exchanges/<exchange>/<attr>", methods=['GET'], endpoint='item')
 def item(exchange, attr):
     exchange = create_exchange(exchange)
-    data = getattr(exchange, attr)()
+    exchange.load_markets()
+    data = getattr(exchange, attr)
     return make_response_ok(data)

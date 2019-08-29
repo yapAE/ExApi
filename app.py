@@ -19,5 +19,10 @@ def not_found_error(error):
     return make_response_error(404, error.description)
 
 
+@app.errorhandler(500)
+def internal_error(error):
+    return make_response_error(500, error.description)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
