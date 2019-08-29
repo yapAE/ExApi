@@ -1,10 +1,11 @@
 import ccxt
 from flask import Flask, Blueprint
-from api import kline, order, make_response_error
+from api import exchange, kline, order, make_response_error
 app = Flask(__name__)
 
 app.register_blueprint(kline._kline)
 app.register_blueprint(order._order)
+app.register_blueprint(exchange._exchange)
 
 
 @app.route('/')

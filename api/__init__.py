@@ -32,6 +32,8 @@ def make_response_error(code, msg):
 
 def create_exchange(exchange_name):
     # 创建交易所
+    exchange_name = _get_request_param(
+        exchange_name) if True else exchange_name
     exchange = getattr(ccxt, exchange_name)()
     exchange.load_markets()
     return exchange
